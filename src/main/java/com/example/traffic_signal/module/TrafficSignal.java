@@ -8,32 +8,28 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
 @Table(name = "Traffic Signal")
 @Data
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class TrafficSignal {
 	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	@Id
-	@Column(name = "signal_id")
-	public int signalId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long signalId;
 	
-	@Column(name = "location")
-	public String location;
+	private String location;
 	
-	@Column(name = "cycle_Duration")
-	public String cycleDuration;
-	
-	@Column(name = "state")
-	public String state;
+	@Column(name = "cycle_duration")
+	private String cycleDuration;
+
+	private String state;
 	
 	
 

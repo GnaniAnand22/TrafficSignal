@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.traffic_signal.module.TrafficSignal;
 
 @Repository
-public interface TrafficSignalrepo extends JpaRepository<TrafficSignal, Integer> {
+public interface TrafficSignalrepo extends JpaRepository<TrafficSignal, Long> {
 
 }
