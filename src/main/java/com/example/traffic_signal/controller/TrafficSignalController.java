@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,22 +33,25 @@ public class TrafficSignalController {
 	}
 	
 	@PostMapping("/addsignal")
-	public ResponseEntity<String> createSignal(@RequestBody TrafficSignal trafficSignal){
+	public ResponseEntity<Object> createSignal(@RequestBody TrafficSignal trafficSignal){
 		
 		String signal=trafficSignalService.createSignal(trafficSignal);
 				
-		return new ResponseEntity<>(signal, HttpStatus.CREATED);
+		return  ResponseHandler.responseBuilder("Signal Created", HttpStatus.CREATED, signal);
+
 		
 	}
 
+	
 	  @GetMapping("/{signalId}") 
-	  public ResponseEntity<Object> getSignalById(@PathVariable long signalId){
-		  TrafficSignal signal=trafficSignalService.getSignalsById(signalId);
-			if(signal==null) {
-				return ResponseHandler.responseBuilder("Find Signals", HttpStatus.NOT_FOUND, signal); 
-			}
-		  return ResponseHandler.responseBuilder("Find Signals", HttpStatus.OK, signal);
-	  }
+	  public ResponseEntity<Object> getSignalById(@PathVariable long signalId){ 
+		  
+		  Optional<TrafficSignal>signal=trafficSignalService.getSignalsById(signalId); 
+		  if(signal.isPresent()){ 
+			  	return ResponseHandler.responseBuilder("Signal FOUND", HttpStatus.OK, signal.get()); 
+		  }else 
+				return ResponseHandler.responseBuilder("Signal NOT FOUND", HttpStatus.NOT_FOUND, null); 
+		  }
 	  
 	  @PutMapping("/update/{signalId}")
 	  public ResponseEntity<Object> updateSignal(@PathVariable long signalId,@RequestBody TrafficSignal signal){
@@ -65,14 +67,14 @@ public class TrafficSignalController {
 		  
 		  	boolean isDelete=trafficSignalService.deleteSignalById(signalId);
 		  	if(isDelete)
-		  	return ResponseHandler.responseBuilder("Signal Delete Details", HttpStatus.OK, "signal "+signalId+" is deleted");
+		  	return ResponseHandler.responseBuilder("signal "+signalId+" is deleted", HttpStatus.OK, "signal  is deleted");
 		  	else {
-			  return ResponseHandler.responseBuilder("Signal Delete Details", HttpStatus.NOT_FOUND, "Signal Not Found");
+			  return ResponseHandler.responseBuilder("Signal NOT FOUND", HttpStatus.NOT_FOUND, "Signal Not Found");
 		  }
 }
 	  @DeleteMapping("/deleteall")
-	  public String deleteAll() {
+	  public ResponseEntity<Object> deleteAll() {
 		  trafficSignalService.deleteSignals();
-		  return "ALL SIGNALS DELETED";
+		  return ResponseHandler.responseBuilder("Delete All", HttpStatus.OK, "All Signals Deleted");
 	  }
 }

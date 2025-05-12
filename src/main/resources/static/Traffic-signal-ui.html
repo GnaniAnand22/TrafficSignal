@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Traffic Signal Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2em;
+      background-color: #f0f2f5;
+    }
+    input, button {
+      margin: 5px;
+      padding: 8px;
+    }
+    .section {
+      margin-bottom: 2em;
+      background: white;
+      padding: 1em;
+      border-radius: 6px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    .signal-list {
+      margin-top: 1em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚦 Traffic Signal Management</h1>
+
+  <!-- Add Signal -->
+  <div class="section">
+    <h2>Add New Signal</h2>
+    <input type="text" id="addLocation" placeholder="Location" />
+    <input type="number" id="addCycleDuration" placeholder="Cycle Duration" />
+    <input type="text" id="addState" placeholder="State (e.g., RED)" />
+    <button onclick="addSignal()">Add</button>
+  </div>
+
+  <!-- Get Signal By ID -->
+  <div class="section">
+    <h2>Get Signal By ID</h2>
+    <input type="number" id="getSignalId" placeholder="Signal ID" />
+    <button onclick="getSignalById()">Get</button>
+    <div id="singleResult"></div>
+  </div>
+
+  <!-- Update Signal -->
+  <div class="section">
+    <h2>Update Signal</h2>
+    <input type="number" id="updateSignalId" placeholder="Signal ID" />
+    <input type="text" id="updateLocation" placeholder="New Location" />
+    <input type="number" id="updateCycleDuration" placeholder="New Cycle Duration" />
+    <input type="text" id="updateState" placeholder="New State" />
+    <button onclick="updateSignal()">Update</button>
+  </div>
+
+  <!-- Delete Signal -->
+  <div class="section">
+    <h2>Delete Signal</h2>
+    <input type="number" id="deleteId" placeholder="Signal ID" />
+    <button onclick="deleteSignal()">Delete</button>
+  </div>
+
+  <!-- Delete All -->
+  <div class="section">
+    <h2>Delete All Signals</h2>
+    <button onclick="deleteAll()">Delete All</button>
+  </div>
+
+  <!-- Get All Signals -->
+  <div class="section">
+    <h2>All Signals</h2>
+    <button onclick="getAllSignals()">Refresh List</button>
+    <div id="allSignals" class="signal-list"></div>
+  </div>
+
+  <script>
+    const baseUrl = 'http://localhost:2025/signals';
+
+    async function getAllSignals() {
+      const res = await fetch(baseUrl + '/getallsignals');
+      const signals = await res.json();
+      const list = signals.map(s =>
+        `<li>ID: ${s.signalId} - Location: ${s.location}, Duration: ${s.cycleDuration}, State: ${s.state}</li>`
+      ).join('');
+      document.getElementById('allSignals').innerHTML = `<ul>${list}</ul>`;
+    }
+    
+    async function getSignalById() { 
+    	  const id = document.getElementById("getSignalId").value;
+    	  const res = await fetch(`${baseUrl}/${id}`);
+
+    	  if (!res.ok) {
+    	    document.getElementById("singleResult").innerText = "Signal not found.";
+    	    return;
+    	  }
+
+    	  const result = await res.json();
+    	  if(res.ok && result.data.value){
+    	  // In case data is wrapped in Optional (with 'value' inside)
+    	  const s = result.data?.value || result.data;
+
+    	  if (s) {
+    	    document.getElementById("singleResult").innerText =
+    	      'Found: ID=${s.signalId}, Location=${s.location}, Duration=${s.cycleDuration}, State=${s.state}';
+    	  } 
+    	  }else {
+    	    document.getElementById("singleResult").innerText = "Signal not found.";
+    	  }
+    	}
+
+
+    async function addSignal() {
+      const body = {
+        location: document.getElementById('addLocation').value,
+        cycleDuration: parseInt(document.getElementById('addCycleDuration').value),
+        state: document.getElementById('addState').value
+      };
+      const res = await fetch(baseUrl + '/addsignal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      alert(data.message || 'Signal added');
+      getAllSignals();
+    }
+
+    async function updateSignal() {
+      const id = document.getElementById('updateSignalId').value;
+      const body = {
+        location: document.getElementById('updateLocation').value,
+        cycleDuration: parseInt(document.getElementById('updateCycleDuration').value),
+        state: document.getElementById('updateState').value
+      };
+      const res = await fetch(`${baseUrl}/update/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      alert(data.message);
+      getAllSignals();
+    }
+
+    async function deleteSignal() {
+      const id = document.getElementById('deleteId').value;
+      const res = await fetch(`${baseUrl}/delete/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      alert(data.message);
+      getAllSignals();
+    }
+
+    async function deleteAll() {
+      const res = await fetch(baseUrl + '/deleteall', { method: 'DELETE' });
+      const data = await res.json();
+      alert(data.message || 'All signals deleted');
+      getAllSignals();
+    }
+
+    // Load on startup
+    getAllSignals();
+  </script>
+</body>
+</html>

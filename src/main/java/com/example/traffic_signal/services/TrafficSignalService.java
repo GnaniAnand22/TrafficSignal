@@ -24,8 +24,8 @@ public class TrafficSignalService  {
 		return "signal created";
 	}
 	
-	public TrafficSignal  getSignalsById(long signalId) {
-		TrafficSignal  signal= trafficSignalrepo.findById(signalId).get();
+	public Optional<TrafficSignal>  getSignalsById(long signalId) {
+		Optional<TrafficSignal>  signal= trafficSignalrepo.findById(signalId);
 		return signal;
 	}
 	
