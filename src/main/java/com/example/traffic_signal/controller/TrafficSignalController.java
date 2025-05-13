@@ -24,8 +24,12 @@ import com.example.traffic_signal.services.TrafficSignalService;
 public class TrafficSignalController {
 	
 	@Autowired
-	TrafficSignalService trafficSignalService;
-	
+	TrafficSignalService trafficSignalService;	
+
+	public TrafficSignalController(TrafficSignalService trafficSignalService) {
+		super();
+		this.trafficSignalService = trafficSignalService;
+	}
 
 	@GetMapping("/getallsignals")
 	public ResponseEntity<List<TrafficSignal>> getAllSignals(){

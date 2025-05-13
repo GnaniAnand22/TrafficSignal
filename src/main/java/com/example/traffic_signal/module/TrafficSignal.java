@@ -1,10 +1,15 @@
 package com.example.traffic_signal.module;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +27,8 @@ public class TrafficSignal {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long signalId;
+	@Column(name = "traffic_signal_id")
+	private long trafficSignalId;
 	
 	private String location;
 	
@@ -30,6 +36,9 @@ public class TrafficSignal {
 	private String cycleDuration;
 
 	private String state;
+	
+	@OneToMany(mappedBy = "trafficSignal",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<SubSignal> subSignals;
 	
 	
 
