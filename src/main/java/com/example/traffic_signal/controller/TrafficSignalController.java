@@ -42,10 +42,7 @@ public class TrafficSignalController {
 		String signal=trafficSignalService.createSignal(trafficSignal);
 				
 		return  ResponseHandler.responseBuilder("Signal Created", HttpStatus.CREATED, signal);
-
-		
 	}
-
 	
 	  @GetMapping("/{signalId}") 
 	  public ResponseEntity<Object> getSignalById(@PathVariable long signalId){ 
