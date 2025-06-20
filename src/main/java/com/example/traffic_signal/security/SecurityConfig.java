@@ -60,6 +60,7 @@ public class SecurityConfig {
 
 	}
 	
+	@Bean
 	public AuthenticationProvider authenticationProvider() {
 		
 		DaoAuthenticationProvider daoAuthenticationProvider=new DaoAuthenticationProvider();

@@ -1,8 +1,11 @@
 package com.example.traffic_signal.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +28,10 @@ public class UserInfoController {
 		
 		return ResponseHandler.responseBuilder("User "+userInfo.getUserName()+" is created",
 												HttpStatus.CREATED,userInfo);
+	}
+	
+	@GetMapping("/users")
+	public List<UserInfo>  getAllusers(){
+		return userInfoService.getAllUsers();
 	}
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.traffic_signal.module.UserInfo;
 
 @Repository
-public interface UserInfoRepository extends JpaRepository<UserInfo, String>{
+public interface UserInfoRepository extends JpaRepository<UserInfo, Long>{
 	
 	Optional<UserInfo> findByUserName(String username);
 

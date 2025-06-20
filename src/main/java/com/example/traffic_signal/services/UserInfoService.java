@@ -1,5 +1,7 @@
 package com.example.traffic_signal.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,10 @@ public class UserInfoService {
 		userInfoRepository.save(userInfo);
 		
 		return "User Created";
+	}
+	
+	public List<UserInfo> getAllUsers() {
+		return userInfoRepository.findAll();
 	}
 
 }
