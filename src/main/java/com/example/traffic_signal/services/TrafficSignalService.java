@@ -31,12 +31,12 @@ public class TrafficSignalService  {
 	
 	public boolean updateSignal(long signalId,TrafficSignal signal) {
 		Optional<TrafficSignal> signals=trafficSignalrepo.findById(signalId);
-		if(signals.isPresent() && signal.getTrafficSignalId()==signalId) {
+		if (signals.isPresent()  && signal.getTrafficSignalId()==signalId ) {
 			trafficSignalrepo.save(signal);
 			return true;
-		}
+		}else {
 		return false;
-		
+		}
 	}
 	
 	public boolean deleteSignalById(long signalId) {
