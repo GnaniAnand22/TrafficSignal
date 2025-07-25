@@ -37,7 +37,7 @@ public class TrafficSignal {
 
 	private String status;
 	
-	@OneToMany(mappedBy = "trafficSignal",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "trafficSignal",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<SubSignal> subSignals;
 	
 	

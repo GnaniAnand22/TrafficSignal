@@ -25,8 +25,7 @@ public class TrafficSignalService  {
 	}
 	
 	public Optional<TrafficSignal>  getSignalsById(long signalId) {
-		Optional<TrafficSignal>  signal= trafficSignalrepo.findById(signalId);
-		return signal;
+		return trafficSignalrepo.findById(signalId);
 	}
 	
 	public boolean updateSignal(long signalId,TrafficSignal signal) {

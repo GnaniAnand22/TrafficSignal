@@ -58,6 +58,10 @@ public class TrafficSignalController {
 	@PostMapping("/addsignal")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Object> createSignal(@RequestBody TrafficSignal trafficSignal) {
+		
+		if(trafficSignal.getSubSignals() != null) {
+			trafficSignal.getSubSignals().forEach(sub -> sub.setTrafficSignal(trafficSignal));
+		}
 
 		String signal = trafficSignalService.createSignal(trafficSignal);
 
@@ -71,6 +75,7 @@ public class TrafficSignalController {
 		Optional<TrafficSignal> signal = trafficSignalService.getSignalsById(signalId);
 		if (signal.isPresent()) {
 			return ResponseHandler.responseBuilder("Signal FOUND", HttpStatus.OK, signal.get());
+			
 		} else
 			return ResponseHandler.responseBuilder("Signal NOT FOUND", HttpStatus.NOT_FOUND, null);
 	}
