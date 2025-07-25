@@ -32,5 +32,10 @@ public class SubSignal {
 	@ManyToOne
 	@JoinColumn(name = "traffic_signal_id")
 	private TrafficSignal trafficSignal;
+	
+	public long getTrafficSignalId() {
+		return trafficSignal != null ?
+				trafficSignal.getTrafficSignalId(): 0 ;
+	}
 
 }

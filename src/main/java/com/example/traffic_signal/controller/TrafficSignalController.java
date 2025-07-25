@@ -1,5 +1,9 @@
 package com.example.traffic_signal.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +23,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.traffic_signal.module.TrafficSignal;
 import com.example.traffic_signal.response.ResponseHandler;
+import com.example.traffic_signal.services.JasperReportService;
 import com.example.traffic_signal.services.TrafficSignalService;
+
+import jakarta.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
 
 @RestController
 @EnableMethodSecurity
@@ -28,6 +36,9 @@ public class TrafficSignalController {
 
 	@Autowired
 	TrafficSignalService trafficSignalService;
+
+	@Autowired
+	JasperReportService jasperReportService;
 
 	public TrafficSignalController(TrafficSignalService trafficSignalService) {
 		super();
@@ -91,4 +102,18 @@ public class TrafficSignalController {
 		trafficSignalService.deleteSignals();
 		return ResponseHandler.responseBuilder("Delete All", HttpStatus.OK, "All Signals Deleted");
 	}
+
+	@GetMapping("/pdf_report")
+	//@PreAuthorize("hasRole(ADMIN)")
+	public void createPDF(HttpServletResponse response)  throws IOException, JRException  {
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+  
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+  
+        jasperReportService.exportJasperReport(response);
+    }
 }

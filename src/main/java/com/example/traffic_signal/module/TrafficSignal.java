@@ -27,7 +27,6 @@ public class TrafficSignal {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "traffic_signal_id")
 	private long trafficSignalId;
 	
 	private String location;

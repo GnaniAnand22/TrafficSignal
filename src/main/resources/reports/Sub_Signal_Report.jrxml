@@ -1,0 +1,75 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="SubSignalReport" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ac6fa3bf-1547-4f44-a259-512e236adb06">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="Ik9SREVSUyIgLDE1LDE1LDhiNzg2ZDE0LTM1MTctNDNhNy04YTZjLWY0MTBkMmQ0MDM1Mjs="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<field name="signal_id" class="java.lang.Long"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="traffic_signal_id" class="java.lang.Long"/>
+	<background/>
+	<title height="72">
+		<element kind="frame" uuid="7dfbe9aa-d9cd-4109-a487-96f57eeb48a0" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699">
+			<element kind="staticText" uuid="57e6eaa1-44b3-4774-b716-ffe26934f5ee" x="20" y="20" width="234" height="43" forecolor="#FFFFFF" fontSize="34.0" bold="true">
+				<text><![CDATA[TRAFFIC SIGNAL]]></text>
+			</element>
+			<element kind="staticText" uuid="291ef6fe-9427-458b-9286-56f2590a36e9" x="395" y="43" width="180" height="20" forecolor="#FFFFFF" fontSize="14.0" bold="false" hTextAlign="Right">
+				<text><![CDATA[Add a description here]]></text>
+			</element>
+		</element>
+	</title>
+	<pageHeader height="13"/>
+	<columnHeader height="22">
+		<element kind="line" uuid="7f77807b-e80b-4ced-943f-6f5a5aa99560" x="-20" y="20" width="595" height="1" forecolor="#666666"/>
+		<element kind="staticText" uuid="eb3f3a78-daf4-4d41-b4bb-7f33d057dac9" mode="Opaque" x="0" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="14.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[SIGNAL ID]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5489e457-0204-4f33-be02-22961276b85d"/>
+		</element>
+		<element kind="staticText" uuid="4bb912e1-239b-49df-8861-c9e29fcfbd6d" mode="Opaque" x="138" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="14.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[TYPE]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="161a0e53-48f8-4621-9073-b70acea5df3b"/>
+		</element>
+		<element kind="staticText" uuid="54db6997-02fd-4d04-bca6-d46ea61941f0" mode="Opaque" x="276" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="14.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[STATUS]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e0a16efe-aeaa-44e4-af67-01950c9f0213"/>
+		</element>
+		<element kind="staticText" uuid="844d6596-66f2-40f1-bccf-deefad4c78cb" mode="Opaque" x="414" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="14.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[TRAFFIC SIGNAL ID]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbb0c12c-ebcd-45de-8ba3-d63648bd65ba"/>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<element kind="line" uuid="194bb1e7-dc15-4fdb-a12a-9b4878fa99de" positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1"/>
+			<element kind="textField" uuid="a922de1b-9d26-4551-91a6-46e3fc50f97d" x="0" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{signal_id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5489e457-0204-4f33-be02-22961276b85d"/>
+			</element>
+			<element kind="textField" uuid="2f61a8cf-f198-404e-9dd8-f4d2c0aa449a" x="138" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{type}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="161a0e53-48f8-4621-9073-b70acea5df3b"/>
+			</element>
+			<element kind="textField" uuid="796f4e8f-df8b-4211-99f4-07e4a1631297" x="276" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{status}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e0a16efe-aeaa-44e4-af67-01950c9f0213"/>
+			</element>
+			<element kind="textField" uuid="ef6c150b-009e-4088-9e67-01f75e3af13f" x="414" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{traffic_signal_id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbb0c12c-ebcd-45de-8ba3-d63648bd65ba"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter/>
+	<pageFooter height="17">
+		<element kind="textField" uuid="58290aae-b23f-471e-89b6-fb93e1b02ce7" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" hTextAlign="Right">
+			<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
+		</element>
+		<element kind="textField" uuid="11cd86cc-7f45-4e04-acf3-e84f91048865" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" evaluationTime="Report">
+			<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="textField" uuid="6820eed9-925e-4b47-b565-dc7006737baf" x="0" y="4" width="100" height="13" pattern="EEEEE dd MMMMM yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</pageFooter>
+	<summary/>
+</jasperReport>
