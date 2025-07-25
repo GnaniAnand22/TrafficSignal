@@ -10,7 +10,7 @@ import com.example.traffic_signal.module.SubSignal;
 @Repository
 public interface SubSignalRepo extends JpaRepository<SubSignal, Long>{
 
-	List<SubSignal> getSignalById(long signalId);
+	List<SubSignal> findBySignalId(long signalId);
 	
 	//public Object getSignalById(long signalId);
 

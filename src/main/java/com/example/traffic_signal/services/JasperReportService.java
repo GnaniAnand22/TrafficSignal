@@ -1,16 +1,17 @@
 package com.example.traffic_signal.services;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
-
 import com.example.traffic_signal.module.SubSignal;
 import com.example.traffic_signal.module.TrafficSignal;
 import com.example.traffic_signal.repository.SubSignalRepo;
@@ -36,17 +37,19 @@ public class JasperReportService {
 	  
 	  
 	    public void exportJasperReport(HttpServletResponse response) throws JRException, IOException {
-	        List<TrafficSignal> signals = trafficSignalrepo.findAll();
-	        
+	      
+	    	List<TrafficSignal> signals = trafficSignalrepo.findAll();    
 	        for(TrafficSignal signal : signals) {
-	        	List<SubSignal> subsignals= subSignalRepo.getSignalById(signal.getTrafficSignalId());
+	        	List<SubSignal> subsignals= subSignalRepo.findBySignalId(signal.getTrafficSignalId());
 	        	signal.setSubSignals(subsignals);
 	        }
 	       
 	        //Get file and compile it
-	        File file = ResourceUtils.getFile("classpath:Traffic_Signal_Report.jrxml");
-	        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+	        InputStream reportStream = new ClassPathResource("reports/Traffic_Signal_Report.jrxml").getInputStream();
+	        JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+	       
 	        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(signals);
+	       
 	        Map<String, Object> parameters = new HashMap<>();
 	        parameters.put("createdBy", "TG Police");
 	      

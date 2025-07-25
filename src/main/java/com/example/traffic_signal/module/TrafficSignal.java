@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "Traffic Signal")
+@Table(name = "Traffic_Signal")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,6 +27,7 @@ public class TrafficSignal {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "traffic_signal_id")
 	private long trafficSignalId;
 	
 	private String location;

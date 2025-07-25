@@ -35,7 +35,7 @@ public class SubSignal {
 	
 	public long getTrafficSignalId() {
 		return trafficSignal != null ?
-				trafficSignal.getTrafficSignalId(): 0 ;
+				trafficSignal.getTrafficSignalId() : 0 ;
 	}
 
 }

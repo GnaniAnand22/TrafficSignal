@@ -1,5 +1,7 @@
 package com.example.traffic_signal.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,7 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -103,17 +107,24 @@ public class TrafficSignalController {
 		return ResponseHandler.responseBuilder("Delete All", HttpStatus.OK, "All Signals Deleted");
 	}
 
-	@GetMapping("/pdf_report")
+	@GetMapping(value = "/pdf_report" , produces = MediaType.APPLICATION_PDF_VALUE)
 	//@PreAuthorize("hasRole(ADMIN)")
-	public void createPDF(HttpServletResponse response)  throws IOException, JRException  {
-        response.setContentType("application/pdf");
+	public ResponseEntity<byte[]> createPDF(HttpServletResponse response)  throws IOException, JRException  {
+		ByteArrayOutputStream baos=new ByteArrayOutputStream();
+		
+		byte[] pdfbytes=baos.toByteArray();
+		
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
   
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+        String headerValue = "attachment; filename=traffic_report_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
   
         jasperReportService.exportJasperReport(response);
+		return ResponseEntity.ok()
+	            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + headerValue)
+	            .contentType(MediaType.APPLICATION_PDF)
+	            .body(pdfbytes);
     }
 }
