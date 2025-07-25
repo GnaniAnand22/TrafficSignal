@@ -35,7 +35,7 @@ public class TrafficSignal {
 	@Column(name = "cycle_duration")
 	private String cycleDuration;
 
-	private String state;
+	private String status;
 	
 	@OneToMany(mappedBy = "trafficSignal",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<SubSignal> subSignals;

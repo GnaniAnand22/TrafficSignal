@@ -2,18 +2,20 @@
 <jasperReport name="Traffic_Signal" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4d84aaa7-1d17-44e6-915a-a2920b5d8a50">
 	<property name="com.jaspersoft.studio.data.sql.tables" value="IkFERFJFU1MiICwxNSwxNSw2Y2E2YjhhNi00M2ZiLTQzMzEtOTY2Yy1hOTZhODQ2NjQ1NzQ7"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
-	<field name="traffic_signal_id" class="java.lang.Integer"/>
-	<field name="cycle_duration" class="java.lang.String"/>
-	<field name="Location" class="java.lang.String"/>
-	<field name="Status" class="java.lang.String"/>
+
+	<field name="trafficSignalId" class="java.lang.Long"/>
+	<field name="cycleDuration" class="java.lang.String"/>
+	<field name="location" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	
 	<background/>
 	<title height="72">
 		<element kind="frame" uuid="b0199d01-11a1-4aa5-a0dd-359240cc46be" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699">
 			<element kind="staticText" uuid="61056da1-1288-4e03-bc22-ceff6fec9127" x="20" y="20" width="234" height="43" forecolor="#FFFFFF" fontSize="34.0" bold="true">
-				<text><![CDATA[TRAFFIC SIGNAL]]></text>
+				<text><![CDATA[TRAFFIC SIGNAL REPORT]]></text>
 			</element>
 			<element kind="staticText" uuid="5235cbc9-9ef9-4109-9334-4791895f1228" x="395" y="43" width="180" height="20" forecolor="#FFFFFF" fontSize="14.0" bold="false" hTextAlign="Right">
-				<text><![CDATA[Add a description here]]></text>
+				<text><![CDATA[from Hyderabad]]></text>
 			</element>
 		</element>
 	</title>
@@ -21,7 +23,7 @@
 	<columnHeader height="21">
 		<element kind="line" uuid="037df015-c81f-4567-b4c4-774135fb3516" x="-20" y="20" width="595" height="1" forecolor="#666666"/>
 		<element kind="staticText" uuid="cf337386-cc55-474b-9d12-453f8d5401ea" mode="Opaque" x="0" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="14.0" bold="true" hTextAlign="Center">
-			<text><![CDATA[TrafficSignalId]]></text>
+			<text><![CDATA[Traffic Signal Id]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9bb45ac5-940b-4f7e-9f9c-e79985433f8e"/>
 		</element>
 		<element kind="staticText" uuid="dd21d2ae-9020-42be-900c-6ed1ad619ab2" mode="Opaque" x="138" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="14.0" bold="true" hTextAlign="Center">
@@ -40,20 +42,20 @@
 	<detail>
 		<band height="20">
 			<element kind="line" uuid="09786d6d-9c7b-4251-95d7-e700641ca824" positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1"/>
-			<element kind="textField" uuid="2d62062b-2002-4835-b6fc-6454ed7ce072" x="0" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
-				<expression><![CDATA[$F{traffic_signal_id}]]></expression>
+			<element kind="textField" uuid="2d62062b-2002-4835-b6fc-6454ed7ce072" x="50" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{trafficSignalId}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9bb45ac5-940b-4f7e-9f9c-e79985433f8e"/>
 			</element>
-			<element kind="textField" uuid="c059f73e-8bc9-4d95-9413-7cc87e383261" x="138" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
-				<expression><![CDATA[$F{cycle_duration}]]></expression>
+			<element kind="textField" uuid="c059f73e-8bc9-4d95-9413-7cc87e383261" x="180" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{cycleDuration}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98a3d03d-b272-4253-be39-27a6b1e15843"/>
 			</element>
-			<element kind="textField" uuid="1a2f3887-51a5-4bbc-90ca-a36c6a304af3" x="276" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
-				<expression><![CDATA[$F{Location}]]></expression>
+			<element kind="textField" uuid="1a2f3887-51a5-4bbc-90ca-a36c6a304af3" x="300" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{location}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="33d9c966-7d64-487d-993e-931d5198facd"/>
 			</element>
-			<element kind="textField" uuid="99d6d098-9d8c-4d6b-b51c-fefb1fd775e2" x="414" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
-				<expression><![CDATA[$F{Status}]]></expression>
+			<element kind="textField" uuid="99d6d098-9d8c-4d6b-b51c-fefb1fd775e2" x="460" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{status}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="84fbfd6b-15ff-4720-b473-af8f9cbd5b10"/>
 			</element>
 		</band>
@@ -66,7 +68,7 @@
 		<element kind="textField" uuid="d6c234ff-e549-4c18-a52f-baabec16d29c" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" evaluationTime="Report">
 			<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
 		</element>
-		<element kind="textField" uuid="33b1c162-1ed2-4afb-b0ee-503fb7de9ee0" x="0" y="4" width="100" height="13" pattern="EEEEE dd MMMMM yyyy">
+		<element kind="textField" uuid="33b1c162-1ed2-4afb-b0ee-503fb7de9ee0" x="0" y="4" width="100" height="13" pattern="yyyy-MM-dd HH:mm:ss">
 			<expression><![CDATA[new java.util.Date()]]></expression>
 		</element>
 	</pageFooter>

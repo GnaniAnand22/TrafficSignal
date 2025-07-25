@@ -2,10 +2,12 @@
 <jasperReport name="SubSignalReport" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ac6fa3bf-1547-4f44-a259-512e236adb06">
 	<property name="com.jaspersoft.studio.data.sql.tables" value="Ik9SREVSUyIgLDE1LDE1LDhiNzg2ZDE0LTM1MTctNDNhNy04YTZjLWY0MTBkMmQ0MDM1Mjs="/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	
 	<field name="signal_id" class="java.lang.Long"/>
 	<field name="type" class="java.lang.String"/>
 	<field name="status" class="java.lang.String"/>
-	<field name="traffic_signal_id" class="java.lang.Long"/>
+	<field name="trafficSignal.trafficSignalId" class="java.lang.Long"/>
+
 	<background/>
 	<title height="72">
 		<element kind="frame" uuid="7dfbe9aa-d9cd-4109-a487-96f57eeb48a0" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699">
@@ -54,7 +56,7 @@
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e0a16efe-aeaa-44e4-af67-01950c9f0213"/>
 			</element>
 			<element kind="textField" uuid="ef6c150b-009e-4088-9e67-01f75e3af13f" x="414" y="0" width="138" height="20" fontSize="14.0" textAdjust="StretchHeight">
-				<expression><![CDATA[$F{traffic_signal_id}]]></expression>
+				<expression><![CDATA[$F{trafficSignal.trafficSignalId}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbb0c12c-ebcd-45de-8ba3-d63648bd65ba"/>
 			</element>
 		</band>
@@ -67,7 +69,7 @@
 		<element kind="textField" uuid="11cd86cc-7f45-4e04-acf3-e84f91048865" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" evaluationTime="Report">
 			<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
 		</element>
-		<element kind="textField" uuid="6820eed9-925e-4b47-b565-dc7006737baf" x="0" y="4" width="100" height="13" pattern="EEEEE dd MMMMM yyyy">
+		<element kind="textField" uuid="6820eed9-925e-4b47-b565-dc7006737baf" x="0" y="4" width="100" height="13" pattern="yyyy-MM-dd HH:mm:ss">
 			<expression><![CDATA[new java.util.Date()]]></expression>
 		</element>
 	</pageFooter>
