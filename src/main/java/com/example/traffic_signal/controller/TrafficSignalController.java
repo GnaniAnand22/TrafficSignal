@@ -69,7 +69,7 @@ public class TrafficSignalController {
 	}
 
 	@GetMapping("/{signalId}")
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('USER','ADMIN')")
 	public ResponseEntity<Object> getSignalById(@PathVariable long signalId) {
 
 		Optional<TrafficSignal> signal = trafficSignalService.getSignalsById(signalId);
